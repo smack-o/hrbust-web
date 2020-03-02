@@ -5,7 +5,7 @@ const commonConfig = require("./webpack.common.config.js")
 
 const defaultProxy = {
   "/api": {
-    target: "http://localhost:8090",
+    target: "http://localhost:8791",
     changeOrigin: true
   }
 }
