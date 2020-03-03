@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import App from './containers/App/index'
 import '@/utils/flexible'
 import '@/assets/global.less'
+import 'antd-mobile/dist/antd-mobile.css'
 
 function renderApp(App: ComponentClass) {
   renderWithHotReload(App)

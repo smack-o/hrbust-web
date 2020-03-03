@@ -50,9 +50,25 @@ module.exports = {
         include: path.join(__dirname, "../src"),
         exclude: "/node_modules/"
       },
+      {
+        test: /\.(css)$/,
+        loaders: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // you can specify a publicPath here
+              // by default it uses publicPath in webpackOptions.output
+              publicPath: "/",
+              hmr: !prod,
+              reloadAll: true
+            }
+          },
+          "css-loader",
+        ]
+      },
       // css
       {
-        test: /\.(less|css)$/,
+        test: /\.(less)$/,
         exclude: /node_modules/,
         loaders: [
           {
