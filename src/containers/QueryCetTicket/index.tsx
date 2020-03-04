@@ -112,6 +112,7 @@ export default class CetTicket extends React.Component<PropsType, StateType> {
 
     if (!res.success) {
       Toast.info(res.data.data.Message, 1)
+      this.onCaptchClick()
       return
     }
 
