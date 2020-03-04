@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import request from '@/utils/request'
 import { Toast, List, InputItem, Button } from 'antd-mobile'
-import { getQuery } from '@/utils'
+import { getQuery, delay } from '@/utils'
 import CanvasPoster from '@/components/CanvasPoster'
 
 import './style.less'
@@ -109,6 +109,8 @@ export default class QueryCet extends React.Component<PropsType, StateType> {
           time: `20${id.slice(6, 8)}年${+id.slice(8, 9) === 2 ? '12' : '2'}月`,
         },
       })
+
+      // await delay(1500)
       const url = await this.canvasPoster.show()
       this.setState({
         showGradeImg: url,
@@ -128,7 +130,6 @@ export default class QueryCet extends React.Component<PropsType, StateType> {
 
     Toast.info(res.message, 2)
   }
-
 
   onFormChange = (name: keyof From, value: any) => {
     const { form } = this.state
@@ -180,7 +181,7 @@ export default class QueryCet extends React.Component<PropsType, StateType> {
               }
             </List>
 
-            <Button className="button" type="primary" onClick={this.onClick}>查询准考证</Button>
+            <Button className="button" type="primary" onClick={this.onClick}>查询四六级成绩</Button>
 
             <CanvasPoster ref={e => this.canvasPoster = e}>
               <div>
@@ -190,7 +191,7 @@ export default class QueryCet extends React.Component<PropsType, StateType> {
                   <div className="wx-cet-line"></div>
                   <div className="wx-cet-line"></div>
                   <div className="wx-cet-time">{grade.time}</div>
-                  <div className="wx-cet-name">{grade.type}考试成绩单</div>
+                  <div className="wx-cet-name"><span>{grade.type}</span><span>成绩单</span></div>
                   <div className="wx-cet-logo-wrap">
                     <div className="wx-cet-logo-detail"><span>CET</span></div>
                   </div>

@@ -34,8 +34,8 @@ export default class CetTicket extends React.Component<PropsType, StateType> {
       captcha: '',
       provinceCode: '',
     },
-    showModal: true,
-    uuid: 'fdsf',
+    showModal: false,
+    uuid: '',
   }
   cookie = ''
 
@@ -60,7 +60,7 @@ export default class CetTicket extends React.Component<PropsType, StateType> {
         cookie: this.cookie || '',
       },
     })
-    console.log(res)
+
     if (res.success) {
       const { title, provinces, base64, cookie } = res.data.data
       console.log(title)
@@ -191,7 +191,7 @@ export default class CetTicket extends React.Component<PropsType, StateType> {
             placeholder="输入身验证码"
             clear
             onChange={(v) => { this.onFormChange('captcha', v) }}
-            extra={<img onClick={this.onCaptchClick} className="captcha" src={captcha} />}
+            extra={captcha && <img onClick={this.onCaptchClick} className="captcha" src={captcha} />}
             value={form.captcha}
           >验证码</InputItem>
         </List>
