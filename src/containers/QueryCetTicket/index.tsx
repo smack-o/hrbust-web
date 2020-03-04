@@ -23,7 +23,7 @@ type StateType = {
 }
 
 @withRouter
-export default class QueryCetTicket extends React.Component<PropsType, StateType> {
+export default class CetTicket extends React.Component<PropsType, StateType> {
   state: StateType = {
     title: '',
     provinces: [],
@@ -178,7 +178,7 @@ export default class QueryCetTicket extends React.Component<PropsType, StateType
             clear
             onChange={(v) => { this.onFormChange('name', v) }}
             value={form.name}
-          >身份证号</InputItem>
+          >姓名</InputItem>
           <InputItem
             type="text"
             placeholder="输入身份证号"
