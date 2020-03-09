@@ -51,7 +51,7 @@ export default class QueryCet extends React.Component<PropsType, StateType> {
 
   setStateP = (data: any) => new Promise(resolve => this.setState(data, resolve))
 
-  getCet = async () => {
+  getCet = async (forceGetCaptcha = false) => {
     const { id, name, captcha } = this.state.form
 
     let msg
@@ -61,7 +61,7 @@ export default class QueryCet extends React.Component<PropsType, StateType> {
     if (!id) {
       msg = '请输入身份证号'
     }
-    if (this.state.captcha && !captcha) {
+    if (!forceGetCaptcha && (this.state.captcha && !captcha)) {
       msg = '请输入验证码'
     }
 
@@ -74,8 +74,11 @@ export default class QueryCet extends React.Component<PropsType, StateType> {
       id,
       name,
     }
-    if (captcha) {
-      sendData.captcha = captcha
+
+    if (captcha && !forceGetCaptcha) {
+      sendData.yzm = captcha
+    }
+    if (this.cookie) {
       sendData.cookie = this.cookie
     }
 
@@ -120,7 +123,7 @@ export default class QueryCet extends React.Component<PropsType, StateType> {
     }
 
     if (+res.data.code === 80001) {
-      const { cookie, base64 } = res.data.data
+      const { cookie, base64 } = res.data
       this.cookie = cookie
       this.setState({
         captcha: base64,
@@ -175,7 +178,7 @@ export default class QueryCet extends React.Component<PropsType, StateType> {
                   placeholder="输入身验证码"
                   clear
                   onChange={(v) => { this.onFormChange('captcha', v) }}
-                  extra={<img className="captcha" src={captcha} />}
+                  extra={<img className="captcha" onClick={() => this.getCet(true)} src={captcha} />}
                   value={form.captcha}
                 >验证码</InputItem>
               }

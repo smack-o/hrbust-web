@@ -34,7 +34,6 @@ export default class CanvasPoster extends PureComponent<PropsType, StateType> {
   }
 
   showImg = () => {
-    console.log(this.canvas.toDataURL())
     return this.canvas.toDataURL()
   }
 
